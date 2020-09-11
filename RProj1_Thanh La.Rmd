@@ -1,0 +1,96 @@
+---
+title: "R Project 1"
+author: "Thanh La"
+date: "9/11/2020"
+output: html_document
+---
+
+
+### Load packages
+
+```{r load-packages, message=FALSE}
+library(tidyverse) 
+library(datasauRus)
+```
+
+
+### Exercise 1
+
+```{r include  = FALSE}
+a = datasaurus_dozen %>%
+  count(dataset) %>%
+  print(13)
+```
+There are 13 rows and 2 columns.
+
+There are 2 variables name "dataset" and "n".
+
+
+### Exercise 2
+
+Plot coordinate for the dinosaur dataset:
+
+```{r plot-dino, fig.height=3, fig.width=6,}
+dino_data <- datasaurus_dozen %>%
+  filter(dataset == "dino")
+ggplot(data = dino_data, mapping = aes(x = x, y = y)) + geom_point()
+```
+
+Calculate the correlation between `x` and `y` in Dinosaur dataset:
+```{r cor-dino}
+dino_data %>%
+  summarize(r = cor(x, y))
+```
+
+### Exercise 3
+
+Plot coordinate for the star dataset:
+```{r plot-star, fig.height=3, fig.width= 5}
+star_data = datasaurus_dozen %>%
+  filter(dataset == "star")
+ggplot(data = star_data, mapping = aes(x = x, y = y)) + geom_point()
+
+
+```
+
+Calculate the correlation between `x` and `y` in Star dataset:
+```{r cor-star}
+star_data %>%
+  summarize(r = cor(x, y))
+
+```
+
+### Exercise 4
+
+Plot coordinate for the circle dataset:
+
+```{r plot_circle, fig.height=2, fig.width=4}
+circle_data = datasaurus_dozen %>%
+  filter(dataset == "circle")
+ggplot(data = circle_data, mapping = aes(x=x, y=y)) + geom_point()
+
+
+```
+
+Calculate the correlation between `x` and `y` in Circle dataset:
+```{r cor-circle}
+circle_data %>%
+  summarize(r = cor(x, y))
+
+
+```
+
+### Exercise 5
+
+```{r}
+ggplot(datasaurus_dozen, aes(x=x, y=y, color = dataset)) + 
+  geom_point() + 
+  facet_wrap(~ dataset, ncol = 3) +
+  theme(legend.position = "none")
+
+datasaurus_dozen %>%
+  group_by(dataset) %>%
+  summarize(r = cor(x, y)) %>%
+  print(13)
+
+```
