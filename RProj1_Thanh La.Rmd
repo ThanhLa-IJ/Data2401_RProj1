@@ -30,7 +30,7 @@ There are 2 variables name "dataset" and "n".
 
 Plot coordinate for the dinosaur dataset:
 
-```{r plot-dino, fig.height=3, fig.width=6,}
+```{r plot-dino, fig.height=5, fig.width=4,}
 dino_data <- datasaurus_dozen %>%
   filter(dataset == "dino")
 ggplot(data = dino_data, mapping = aes(x = x, y = y)) + geom_point()
